@@ -1,9 +1,9 @@
-Finance Tracker API
+**Finance Tracker API**
 A simple API built using Node.js and Express.
 
-Tech Stack
-Database: MongoDB
-Encryption: Bcrypt.js, JSON Web Token (JWT)
+**Tech Stack**
+**Database**: MongoDB
+**Encryption**: Bcrypt.js, JSON Web Token (JWT)
 Collections (Tables)
 The API consists of two collections:
 
@@ -11,8 +11,8 @@ Users – Stores user information
 Finance – Stores financial transactions
 The API supports two HTTP methods:
 
-POST – For user registration and login
-GET – For retrieving data
+**POST** – For user registration and login
+**GET** – For retrieving data
 1️⃣ Users API
 a. Register User
 Endpoint: POST /user/register
@@ -23,9 +23,9 @@ Accepts username and password from the request body.
 Checks if the user already exists. If yes, it returns an error.
 Encrypts the password using bcrypt.
 Stores the user in the database.
-Request Example (Postman/Thunder Client):
-📌 URL: http://localhost:3001/user/register
-📌 Body (JSON):
+**Request Example (Postman/Thunder Client):**
+📌 **URL**: http://localhost:3001/user/register
+📌 **Body** (JSON):
 
 {
     "username": "<your_username>",
@@ -45,9 +45,9 @@ Compares the provided password with the hashed password using bcrypt.compare().
 If the password is incorrect, returns an error.
 Generates an authentication token using jsonwebtoken.
 Returns the token in the response.
-Request Example (Postman/Thunder Client):
-📌 URL: http://localhost:3001/user/login
-📌 Body (JSON):
+**Request Example (Postman/Thunder Client):**
+📌 **URL**: http://localhost:3001/user/login
+📌 **Body** (JSON):
 
 {
     "username": "<your_username>",
@@ -56,7 +56,7 @@ Request Example (Postman/Thunder Client):
 ✅ Response: Token is returned for authentication.
 
 
-Possible Errors:
+**Possible Errors:**
 Status Code: 500
 Message: Internal Server Error
 
