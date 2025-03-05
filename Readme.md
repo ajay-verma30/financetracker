@@ -4,9 +4,14 @@ A simple API built using Node.js and Express.
 **Tech Stack**
 **Database**: MongoDB
 **Encryption**: Bcrypt.js, JSON Web Token (JWT)
+Changes Required: 
+Add .env file to the root directory and the Following
+1. DB_USERNAME=<mongodb_username>
+2. DB_PASSWORD=<mongoddb_password>
+3. JWT_TOKEN=<SECRET_KEY>
+
 Collections (Tables)
 The API consists of two collections:
-
 Users – Stores user information
 Finance – Stores financial transactions
 The API supports two HTTP methods:
