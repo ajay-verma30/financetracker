@@ -84,4 +84,50 @@ route.post(
     }
 );
 
+
+route.put('/profilepicture/:username', authenticateToken,upload.single('image'), async (req, res) => {
+    try {
+        const { username } = req.params;
+
+        if (!username || !req.file) {
+            return res.status(400).json({ message: "The username and file both are required." });
+        }
+
+        const fileUrl = `/uploads/${req.file.filename}`;
+
+        const updateUser = await User.findOneAndUpdate(
+            { username: username },
+            { profilePic: fileUrl },
+            { new: true } 
+        );
+
+        if (!updateUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        return res.status(200).json({ message: "User profile updated successfully", user: updateUser });
+    } catch (e) {
+        return res.status(500).json({ message: "Internal Server Error", error: e.message });
+    }
+});
+
+
+route.delete('/:username', authenticateToken, async(req,res)=>{
+    try{
+        const {username} = req.params;
+        if(!username){
+            return res.status(400).json({message:"Username is required to delete the user"});
+        }
+        await Finance.deleteMany({username:username});
+        const deleteUser = await User.findOneAndDelete({username:username});
+        if(!deleteUser){
+            return res.status(404).json("Username not found");
+        }
+        return res.status(200).json({message:"User Deleted from the database"});
+    }
+    catch(e){
+        return res.status(500).json({message:"Internal server error", error:e});
+    }
+})
+
 module.exports = route;
