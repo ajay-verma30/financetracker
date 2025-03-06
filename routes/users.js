@@ -3,7 +3,39 @@ const route = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
+const multer = require('multer');
+const path = require('path');
+const Finance = require('../models/finance'); 
 const { body, validationResult } = require('express-validator');
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); 
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png/;
+    const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType = allowedTypes.test(file.mimetype);
+
+    if (extName && mimeType) {
+        return cb(null, true);
+    } else {
+        return cb(new Error('Only images are allowed!'), false);
+    }
+};
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB file size limit
+    fileFilter: fileFilter
+});
 
 route.post('/register', [
     body('username').notEmpty().withMessage("Username cannot be empty").isLength({min:5}).withMessage("Username must be atleast more than 5 characters long")
