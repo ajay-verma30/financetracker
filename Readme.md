@@ -6,6 +6,12 @@ A simple API built using Node.js and Express for tracking financial transactions
 **Database:** MongoDB
 **Authentication & Encryption:** Bcrypt.js, JSON Web Token (JWT)
 
+**NOTE**
+Include .env file with following;
+DB_USERNAME:<Username>
+DB_PASSWORD:<Password>
+JWT_TOKEN:<SECRET_KEY_for_Encryption>
+
 Collections (Tables)
 The API consists of two collections:
 
@@ -14,6 +20,8 @@ The API consists of two collections:
 Supported HTTP Methods
 **POST** – For user registration, login, and transaction recording.
 **GET** – For retrieving financial reports.
+**Update** - For uploading profile picture to the user DB.
+**Delete** -  Deleting user profile from the db.
 
 1️⃣ **Users API**
 a. Register User
@@ -145,6 +153,22 @@ Request Body (JSON)
     "username": "<your_username>"
 }
 📌 Response: Returns the full financial report of the user.
+
+
+Update API:
+📌 Endpoint: PUT /user/:<username>
+Headers:
+{
+    "Authorization": "Bearer <token>"
+}
+
+Request Body - Form-Data
+{
+    "image": <SELECT_IMAGE>
+}
+
+
+**Using Delete API will delete entire history of the user from both tables(Finance and User)**
 
 📌 **How to Run This Project Locally**
 Clone the repository:
