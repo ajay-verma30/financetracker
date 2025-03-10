@@ -6,6 +6,7 @@ const User = require('../models/users');
 const multer = require('multer');
 const path = require('path');
 const Finance = require('../models/finance'); 
+const authenticateToken = require('../authentication/authenticateToken')
 const { body, validationResult } = require('express-validator');
 
 
