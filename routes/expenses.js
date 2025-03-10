@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const authenticateToken = require('../authentication/authenticateToken');
 const { body, validationResult } = require('express-validator');
 
-route.get('/myfinances', authenticateToken, async (req, res) => {
+route.get('/myfinances/:username', authenticateToken, async (req, res) => {
     try {
-        const {username} = req.body;
+        const {username} = req.params;
         if(!username){
             return res.status(400).json({message:"No user Provided"});
         }
